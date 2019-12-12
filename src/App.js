@@ -8,7 +8,8 @@ import { connect } from 'react-redux'
 import { increment } from './reducers/action_creators'
 
 
-const App = ({increment}) => {
+const App = ({increment, count}) => {
+  console.log(count);
   const state = {
     additionalPrice: 0,
     car: {
@@ -40,6 +41,7 @@ const App = ({increment}) => {
         <Header car={state.car} />
         <AddedFeatures car={state.car} />
         <button onClick={increment}>+1</button>
+        <p>{count}</p>
       </div>
       <div className="box">
         <AdditionalFeatures additionalFeatures={state.additionalFeatures} />
@@ -49,4 +51,12 @@ const App = ({increment}) => {
   );
 };
 
-export default connect(state => state, {increment})(App);
+function mapStateToProps(state) {
+  return {
+    count: state.count,
+  };
+}
+export default connect(
+  mapStateToProps, 
+  { increment } 
+)(App);

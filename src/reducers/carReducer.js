@@ -1,12 +1,12 @@
 import { INCREMENT } from './action_types'
 
-const initialCount = 0
+const initialCount = 3
 
 export function countReducer (count = initialCount, action) {
-    switch(action.types) {
+    switch(action.type) {
         case INCREMENT:
-            return count + 1
+            return count + 1;
         default:
-            return count
+            return count;
     }
 }
