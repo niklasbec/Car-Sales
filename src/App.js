@@ -4,8 +4,12 @@ import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
+import { connect } from 'react-redux'
+import { increment } from './reducers/action_creators'
 
-const App = () => {
+
+const App = ({increment, count}) => {
+  console.log(count);
   const state = {
     additionalPrice: 0,
     car: {
@@ -36,6 +40,8 @@ const App = () => {
       <div className="box">
         <Header car={state.car} />
         <AddedFeatures car={state.car} />
+        <button onClick={increment}>+1</button>
+        <p>{count}</p>
       </div>
       <div className="box">
         <AdditionalFeatures additionalFeatures={state.additionalFeatures} />
@@ -45,4 +51,12 @@ const App = () => {
   );
 };
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    count: state.count,
+  };
+}
+export default connect(
+  mapStateToProps, 
+  { increment } 
+)(App);
